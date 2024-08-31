@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
@@ -30,23 +31,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import bankingtest.example.bankingtest.Data.ViewHomeScreen
 import com.example.bankingtest.R
-
+@Preview
 @Composable
-fun AccountComponent(vm: ViewHomeScreen) {
+fun AccountComponent() {
+    val vm: ViewHomeScreen = viewModel()
+    var user by remember { mutableStateOf(vm.dataUser) }
     var showDialog by remember { mutableStateOf(false) }
     var showNotificationDialog by remember { mutableStateOf(false) }
     Row(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         // image user for profile
         Row {
             Image(
-                painterResource(id = R.drawable.me),
+                painterResource(id = user.img),
                 contentDescription = "Profile",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -62,7 +67,7 @@ fun AccountComponent(vm: ViewHomeScreen) {
             ) {
                 // user name
                 Text(
-                    text = "Hello, ${vm.name.takeLast(7)} !",
+                    text = "Hello, ${user.name.takeLast(7)} !",
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
@@ -82,9 +87,10 @@ fun AccountComponent(vm: ViewHomeScreen) {
             modifier = Modifier,
         ) {
             // Notification icon
-            Icon(painter = painterResource(id = R.drawable.ic_notification),
+            Image(painter = painterResource(id = R.drawable.ic_notification),
                 contentDescription = "notification",
                 modifier = Modifier
+                    .padding(end = 10.dp)
                     .size(20.dp)
                     .clickable { showNotificationDialog = true }
             )
@@ -97,9 +103,9 @@ fun AccountComponent(vm: ViewHomeScreen) {
                 // )
             }
             // QR code icon
-            Image(imageVector = R.drawable.ic_bk,
-            contenDescription = "qr code",
-            modifier = Modifier
+            Image(painter = painterResource(id = R.drawable.ic_bk),
+                contentDescription = "",
+                modifier = Modifier
                 .size(20.dp)
                 .clickable { showDialog = true })
             if (showDialog) {
