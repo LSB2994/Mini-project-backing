@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -53,7 +54,7 @@ import com.example.bankingtest.R
 @Composable
 fun WalletCardComponent() {
     val vm: ViewHomeScreen = viewModel()
-    var user by remember { mutableStateOf(vm.dataUser) }
+    val user by remember { mutableStateOf(vm.dataUser) }
     val brush = Brush.horizontalGradient(
         listOf(
             Color(0xFFFF3D7C).copy(0.38f),
@@ -69,65 +70,147 @@ fun WalletCardComponent() {
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
         modifier = Modifier
             .fillMaxWidth()
-            .clip(shape = RoundedCornerShape(10.dp))
+            .clip(shape = RoundedCornerShape(15.dp))
             .background(brush = backgroundBlur)
-            .size(width = 353.dp, height = 114.dp)
-            .border(2.dp, brush, RoundedCornerShape(0.dp))
+            .size(width = 353.dp, height = 120.dp)
+            .border(2.dp, brush, RoundedCornerShape(15.dp))
     ) {
-        Column {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(10.dp)
-            ) {
-                if (balanceVisible) {
-                    Box(
-                        modifier = Modifier
-                            .size(width = 100.dp, height = 40.dp),
-                        Alignment.Center
-                    ){
-                        Text(
-                            text = "\$ ${user.balance}",
-                            color = Color.White,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center,
-                        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(10.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Column {
+                Row(
+                    modifier = Modifier,
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    if (balanceVisible) {
+                        Box(
+                            modifier = Modifier.wrapContentSize().padding(5.dp),
+                            Alignment.CenterStart
+                        ) {
+                            Text(
+                                text = "\$ ${user.balance}",
+                                color = Color.White,
+                                fontSize = 18.sp,
+                                textAlign = TextAlign.Start,
+                            )
+                        }
+                    } else {
+                        Box(
+                            modifier = Modifier
+                                .blur(10.dp)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Color.White.copy(0.10f))
+                                .padding(5.dp)
+                                .wrapContentSize(), Alignment.CenterStart
+                        ) {
+                            Text(
+                                text = "\$ ${vm.dataUser.balance}",
+                                textAlign = TextAlign.Start,
+                                color = Color.White,
+                                fontSize = 18.sp,
+                            )
+                        }
                     }
-                } else {
                     Box(
-                        modifier = Modifier.blur(radius = 0.dp)
-                            .blur(7.dp)
-//                            .padding(end = 5.dp)
-                            .background(Color.White.copy(0.03f))
-                            .size(width = 100.dp, height = 40.dp),
-                        Alignment.Center
-                    ){
-                        Text(
-                            text = "\$ ${vm.dataUser.balance}",
-                            textAlign = TextAlign.Center,
-                            color = Color.White,
-                            fontSize = 18.sp,
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(width = 40.dp, height = 30.dp)
+                            .padding(start = 5.dp)
+                            .clip(RoundedCornerShape(5.dp))
+                            .background(Color.White.copy(0.20f))
+                            .clickable { balanceVisible = !balanceVisible },
+                    ) {
+                        Icon(
+                            imageVector = if (balanceVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                            contentDescription = if (balanceVisible) "Hide balance" else "Show balance",
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.White
                         )
                     }
                 }
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .size(40.dp)
-                        .padding(start = 5.dp)
-                        .clip(RoundedCornerShape(5.dp))
-                        .background(Color.White.copy(0.05f))
-                        .clickable { balanceVisible = !balanceVisible },
+                Row(
+                    modifier = Modifier.padding(top = 5.dp),
                 ) {
-                    Icon(
-                        imageVector = if (balanceVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
-                        contentDescription = if (balanceVisible) "Hide balance" else "Show balance",
-                        modifier = Modifier.size(20.dp),
-                        tint = Color.White
-                    )
+                    Box(
+                        modifier = Modifier
+                            .size(width = 50.dp, height = 16.dp)
+                            .clip(RoundedCornerShape(5.dp))
+                            .background(Color(0xFF34C2FF)),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text(
+                            fontSize = 10.sp,
+                            color = Color.White,
+                            text = "Default",
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(width = 40.dp, height = 16.dp)
+                            .padding(start = 3.dp), Alignment.Center
+                    ) {
+                        Text(
+                            text = "Saving",
+                            color = Color.White,
+                            fontSize = 10.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
+            Column {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.size(width = 240.dp, height = 20.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Box(
+                        modifier = Modifier.align(alignment = Alignment.CenterVertically),
+                    ) {
+                        Row( // Row to position image and text horizontally
+                            verticalAlignment = Alignment.CenterVertically // Center vertically within the Row
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_receive),
+                                contentDescription = "",
+                                modifier = Modifier.size(width = 20.dp, height = 20.dp)
+                            )
+                            Text(
+                                text = "Received money",
+                                color = Color.White,
+                                modifier = Modifier
+                                    .padding(start = 2.dp)
+                            )
+                        }
+                    }
+                    Box(
+                        modifier = Modifier.align(alignment = Alignment.CenterVertically),
+                    ) {
+                        Row( // Row to position image and text horizontally
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_pay),
+                                contentDescription = "",
+                                modifier = Modifier.size(width = 20.dp, height = 20.dp)
+                            )
+                            Text(
+                                text = "Send money",
+                                color = Color.White,
+                                modifier = Modifier.padding(
+                                    start = 2.dp
+                                )
+                            )
+                        }
+                    }
                 }
             }
         }
-
     }
 }

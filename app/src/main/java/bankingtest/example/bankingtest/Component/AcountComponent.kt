@@ -41,7 +41,7 @@ import com.example.bankingtest.R
 @Composable
 fun AccountComponent() {
     val vm: ViewHomeScreen = viewModel()
-    var user by remember { mutableStateOf(vm.dataUser) }
+    val user by remember { mutableStateOf(vm.dataUser) }
     var showDialog by remember { mutableStateOf(false) }
     var showNotificationDialog by remember { mutableStateOf(false) }
     Row(

@@ -28,6 +28,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import bankingtest.example.bankingtest.Component.AccountComponent
+import bankingtest.example.bankingtest.Component.EditHomeComponent
+import bankingtest.example.bankingtest.Component.FinanceCardComponent
+import bankingtest.example.bankingtest.Component.NewsSlideComponent
 import bankingtest.example.bankingtest.Component.WalletCardComponent
 import bankingtest.example.bankingtest.Data.ViewHomeScreen
 import bankingtest.example.bankingtest.ui.theme.BankingTestTheme
@@ -70,9 +73,17 @@ fun HomeScreen() {
             // Account Section
             AccountComponent()
             Spacer(modifier = Modifier.height(20.dp))
+            //wallet section
             WalletCardComponent()
-//        FinanceSection()
-//        CurreniesSection()
+            //Finance section
+            Spacer(modifier = Modifier.height(20.dp))
+            FinanceCardComponent()
+            //News Slide Section
+            Spacer(modifier = Modifier.height(20.dp))
+            NewsSlideComponent()
+            // Edit home button sheet
+            Spacer(modifier = Modifier.height(20.dp))
+            EditHomeComponent()
         }
     }
 }
