@@ -32,7 +32,8 @@ fun EditHomeComponent() {
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Button(onClick = { showDialog = true },colors = ButtonDefaults.buttonColors(containerColor = Color.White)) {
+        Button(onClick = { showDialog = true },
+            colors = ButtonDefaults.buttonColors(containerColor = Color.White)) {
             Text(
                 text = "Edit Home",
                 color = Color.Black,
@@ -40,8 +41,10 @@ fun EditHomeComponent() {
             )
         }
         if (showDialog){
-            ModalBottomSheet(onDismissRequest = { showDialog = false }, modifier = Modifier.padding(bottom = 15.dp),) {
-                Text(text = "Edit Home")
+            ModalBottomSheet(onDismissRequest = { showDialog = false },
+                modifier = Modifier
+                    .padding(bottom = 15.dp),) {
+                AppearanceDialog()
                 Button(onClick = { showDialog = false}) {
                     Text(text = "Save")
                 }

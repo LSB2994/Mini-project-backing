@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -88,6 +89,7 @@ fun EachFinanceCard() {
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color.Transparent),
                 modifier = Modifier
+//                    .fillMaxWidth()
                     .size(width = 100.dp, height = 100.dp)
                     .clip(shape = RoundedCornerShape(15.dp))
                     .background(Color(0xFFEBF2F9))
