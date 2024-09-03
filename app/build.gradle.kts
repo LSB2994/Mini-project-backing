@@ -75,4 +75,5 @@ dependencies {
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
     implementation(libs.compose.qr.code)
+    implementation(libs.androidx.appcompat)
 }

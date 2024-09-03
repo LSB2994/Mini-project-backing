@@ -42,11 +42,22 @@ fun EditHomeComponent() {
         }
         if (showDialog){
             ModalBottomSheet(onDismissRequest = { showDialog = false },
-                modifier = Modifier
-                    .padding(bottom = 15.dp),) {
-                AppearanceDialog()
-                Button(onClick = { showDialog = false}) {
-                    Text(text = "Save")
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                containerColor = Color(0xFFF8F8F8)
+            ) {
+                Column(
+                    modifier = Modifier.padding(bottom = 40.dp),
+                ) {
+                    AppearanceDialog()
+                    Button(
+                        onClick = { showDialog = false },
+                        colors = ButtonDefaults.buttonColors(Color(0xFF00468B)),
+                        modifier = Modifier
+                            .align(Alignment.End)
+                            .padding(end = 20.dp),
+                    ) {
+                        Text(text = "Save")
+                    }
                 }
             }
         }

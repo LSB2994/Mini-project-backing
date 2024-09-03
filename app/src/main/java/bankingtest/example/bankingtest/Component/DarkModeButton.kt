@@ -1,2 +1,6 @@
-package bankingtest.example.bankingtest.Component
+import androidx.compose.runtime.Composable
 
+@Composable
+fun DarkModeButton() {
+
+}
