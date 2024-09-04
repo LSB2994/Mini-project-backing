@@ -24,9 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun EditHomeComponent() {
+fun EditHomeComponent(darkMode:Boolean) {
     var showDialog by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -42,13 +41,13 @@ fun EditHomeComponent() {
         }
         if (showDialog){
             ModalBottomSheet(onDismissRequest = { showDialog = false },
-                modifier = Modifier.align(Alignment.CenterHorizontally),
+                modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
                 containerColor = Color(0xFFF8F8F8)
             ) {
                 Column(
                     modifier = Modifier.padding(bottom = 40.dp),
                 ) {
-                    AppearanceDialog()
+                    AppearanceDialog(darkMode)
                     Button(
                         onClick = { showDialog = false },
                         colors = ButtonDefaults.buttonColors(Color(0xFF00468B)),

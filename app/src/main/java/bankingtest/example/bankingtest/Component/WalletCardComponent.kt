@@ -47,6 +47,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import bankingtest.example.bankingtest.Data.Money
 import bankingtest.example.bankingtest.Data.ViewHomeScreen
 import com.example.bankingtest.R
 
@@ -54,6 +55,9 @@ import com.example.bankingtest.R
 @Composable
 fun WalletCardComponent() {
     val vm: ViewHomeScreen = viewModel()
+    var moneySaving by remember {
+        mutableStateOf(Money.DEFAULT)
+    }
     val user by remember { mutableStateOf(vm.dataUser) }
     val brush = Brush.horizontalGradient(
         listOf(
@@ -63,8 +67,7 @@ fun WalletCardComponent() {
             Color(0xFF941FFF).copy(0.48f)
         )
     )
-    val backgroundBlur =
-        Brush.horizontalGradient(listOf(Color.White.copy(0.35f), Color.White.copy(0.06f)))
+    val backgroundBlur = Brush.horizontalGradient(listOf(Color.White.copy(0.35f), Color.White.copy(0.06f)))
     var balanceVisible by remember { mutableStateOf(false) }
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
@@ -89,7 +92,9 @@ fun WalletCardComponent() {
                 ) {
                     if (balanceVisible) {
                         Box(
-                            modifier = Modifier.wrapContentSize().padding(5.dp),
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .padding(5.dp),
                             Alignment.CenterStart
                         ) {
                             Text(
@@ -138,9 +143,12 @@ fun WalletCardComponent() {
                 ) {
                     Box(
                         modifier = Modifier
+                            .clickable { moneySaving = Money.DEFAULT }
                             .size(width = 50.dp, height = 16.dp)
                             .clip(RoundedCornerShape(5.dp))
-                            .background(Color(0xFF34C2FF)),
+                            .background( if (moneySaving == Money.DEFAULT)
+                                Color(0xFF34C2FF)
+                            else Color.White.copy(0f)),
                         contentAlignment = Alignment.Center,
                     ) {
                         Text(
@@ -152,8 +160,15 @@ fun WalletCardComponent() {
                     }
                     Box(
                         modifier = Modifier
+                            .clickable { moneySaving = Money.SAVING }
                             .size(width = 40.dp, height = 16.dp)
-                            .padding(start = 3.dp), Alignment.Center
+                            .clip(RoundedCornerShape(5.dp))
+                            .background(if (moneySaving == Money.SAVING)
+                                Color(0xFF34C2FF)
+                                else Color.White.copy(0f)
+                            )
+                        ,
+                        contentAlignment = Alignment.Center,
                     ) {
                         Text(
                             text = "Saving",

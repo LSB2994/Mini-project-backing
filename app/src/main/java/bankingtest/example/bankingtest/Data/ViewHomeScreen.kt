@@ -7,12 +7,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.lifecycle.ViewModel
 import com.example.bankingtest.R
-
+// saving
+enum class Money {
+    DEFAULT,
+    SAVING
+}
+// edit home
+enum class SettingsOption {
+    THEMES, DARK_MODE, LANGUAGE
+}
+// user dataa
 data class User(
     val name: String,
     val balance: Float,
     val img:Int
 )
+// finance card
 data class FinanceCard(
     val id:Int? = null,
     val title:String? = null,

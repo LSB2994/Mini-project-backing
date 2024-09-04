@@ -5,13 +5,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -77,54 +80,56 @@ fun EachFinanceCard() {
             Color(0xFF202F45),
         )
     )
-    LazyVerticalGrid(
-        userScrollEnabled = false,
-        columns = GridCells.Fixed(3),
-        modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(card.getAllFinanceCard().size) { item ->
-            Card(
-                colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-                modifier = Modifier
+    Box(modifier = Modifier.height(240.dp)) {
+        LazyVerticalGrid(
+            userScrollEnabled = false,
+            columns = GridCells.Fixed(3),
+            modifier = Modifier.wrapContentSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(card.getAllFinanceCard().size) { item ->
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+                    modifier = Modifier
 //                    .fillMaxWidth()
-                    .size(width = 100.dp, height = 100.dp)
-                    .clip(shape = RoundedCornerShape(15.dp))
-                    .background(Color(0xFFEBF2F9))
-                    .border(2.dp, Color.White.copy(0.0f), RoundedCornerShape(15.dp))
-                    .padding(10.dp)
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.End,
+                        .size(width = 100.dp, height = 100.dp)
+                        .clip(shape = RoundedCornerShape(15.dp))
+                        .background(Color(0xFFEBF2F9))
+                        .border(2.dp, Color.White.copy(0.0f), RoundedCornerShape(15.dp))
+                        .padding(10.dp)
                 ) {
-                    card.getAllFinanceCard()[item].img?.let {
-                        painterResource(id = it)
-                    }?.let {
-                        Image(
-                            painter = it,
-                            contentDescription = "finance icon",
-                            modifier = Modifier
-                                .size(28.dp)
-                                .padding(2.dp)
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.End,
+                    ) {
+                        card.getAllFinanceCard()[item].img?.let {
+                            painterResource(id = it)
+                        }?.let {
+                            Image(
+                                painter = it,
+                                contentDescription = "finance icon",
+                                modifier = Modifier
+                                    .size(28.dp)
+                                    .padding(2.dp)
+                            )
+                        }
+                    }
+                    Column {
+                        Text(text = card.getAllFinanceCard()[item].title.toString(),
+                            fontWeight = FontWeight.Bold,
+                            style = TextStyle(brush = colorTittle),
+                            fontSize = 15.sp,
+                            modifier = Modifier.padding(top = 5.dp)
+                        )
+                        Text(
+                            text = card.getAllFinanceCard()[item].description.toString(),
+                            fontSize = 10.sp,
+                            color = Color(0xFF31456A),
+                            modifier = Modifier.padding(top = 5.dp)
                         )
                     }
-                }
-                Column {
-                    Text(text = card.getAllFinanceCard()[item].title.toString(),
-                        fontWeight = FontWeight.Bold,
-                        style = TextStyle(brush = colorTittle),
-                        fontSize = 15.sp,
-                        modifier = Modifier.padding(top = 5.dp)
-                    )
-                    Text(
-                        text = card.getAllFinanceCard()[item].description.toString(),
-                        fontSize = 10.sp,
-                        color = Color(0xFF31456A),
-                        modifier = Modifier.padding(top = 5.dp)
-                    )
                 }
             }
         }

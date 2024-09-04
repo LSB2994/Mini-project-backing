@@ -21,6 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -41,9 +44,11 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val darkMode by mutableStateOf(false)
         setContent {
+
             SetBarColor(color = Color(0xFF00468B))
-            HomeScreen()
+            HomeScreen(darkMode)
         }
     }
 }
@@ -59,32 +64,33 @@ private fun SetBarColor(color: Color) {
     }
 }
 
-@Preview
 @Composable
-fun HomeScreen() {
+fun HomeScreen(darkMode: Boolean) {
     val vm: ViewHomeScreen = viewModel()
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF00468B))
     ) {
-        Column(
-            Modifier.padding(14.dp)
-        ) {
-            // Account Section
-            AccountComponent()
-            Spacer(modifier = Modifier.height(20.dp))
-            //wallet section
-            WalletCardComponent()
-            //Finance section
-            Spacer(modifier = Modifier.height(20.dp))
-            FinanceCardComponent()
-            //News Slide Section
-            Spacer(modifier = Modifier.height(20.dp))
-            NewsSlideComponent()
-            // Edit home button sheet
-            Spacer(modifier = Modifier.height(20.dp))
-            EditHomeComponent()
+        item {
+            Column(
+                Modifier.padding(14.dp)
+            ) {
+                // Account Section
+                AccountComponent()
+                Spacer(modifier = Modifier.height(20.dp))
+                //wallet section
+                WalletCardComponent()
+                //Finance section
+                Spacer(modifier = Modifier.height(20.dp))
+                FinanceCardComponent()
+                //News Slide Section
+                Spacer(modifier = Modifier.height(20.dp))
+                NewsSlideComponent()
+                // Edit home button sheet
+                Spacer(modifier = Modifier.height(20.dp))
+                EditHomeComponent(darkMode)
+            }
         }
     }
 }
