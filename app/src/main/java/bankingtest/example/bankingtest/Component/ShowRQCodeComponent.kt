@@ -32,11 +32,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.lifecycle.viewmodel.compose.viewModel
+import bankingtest.example.bankingtest.Data.ViewHomeScreen
 import com.example.bankingtest.R
 @Composable
 fun FullScreenDialog(
     onDismiss: () -> Unit
 ) {
+    var vm:ViewHomeScreen = viewModel()
     Dialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(),
@@ -48,7 +51,7 @@ fun FullScreenDialog(
         ) {
             Icon(
                 modifier = Modifier
-                    .clickable { onDismiss() }
+                    .clickable {if (vm.isClose) true else onDismiss().also { vm.isClose = false }}
                     .padding(5.dp)
                     .background(Color.White, shape = CircleShape),
                 imageVector = Icons.Default.Close,

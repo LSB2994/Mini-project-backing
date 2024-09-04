@@ -46,7 +46,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val darkMode by mutableStateOf(false)
         setContent {
-
             SetBarColor(color = Color(0xFF00468B))
             HomeScreen(darkMode)
         }

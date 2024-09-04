@@ -52,8 +52,10 @@ fun AppearanceDialog(darkMode:Boolean) {
     var selectedOption by remember { mutableStateOf(SettingsOption.THEMES) }
     Column(
         modifier = Modifier
-            .fillMaxWidth().padding(15.dp)
+            .fillMaxWidth()
+            .padding(15.dp)
     ) {
+        Text(text = "Appearance", fontSize = 20.sp, modifier = Modifier.padding())
         Row {
             Button(
                 onClick = { selectedOption = SettingsOption.THEMES },
@@ -120,8 +122,10 @@ fun AppearanceDialog(darkMode:Boolean) {
                     items(4) {
                         Box(
                             modifier = Modifier
-                                .background(Color.White,
-                                    shape = RoundedCornerShape(10.dp))
+                                .background(
+                                    Color.White,
+                                    shape = RoundedCornerShape(10.dp)
+                                )
                                 .padding(15.dp)
                         ) {
                             Image(

@@ -68,7 +68,7 @@ fun WalletCardComponent() {
         )
     )
     val backgroundBlur = Brush.horizontalGradient(listOf(Color.White.copy(0.35f), Color.White.copy(0.06f)))
-    var balanceVisible by remember { mutableStateOf(false) }
+//    var
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
         modifier = Modifier
@@ -90,7 +90,7 @@ fun WalletCardComponent() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                 ) {
-                    if (balanceVisible) {
+                    if (vm.isVisible) {
                         Box(
                             modifier = Modifier
                                 .wrapContentSize()
@@ -128,11 +128,11 @@ fun WalletCardComponent() {
                             .padding(start = 5.dp)
                             .clip(RoundedCornerShape(5.dp))
                             .background(Color.White.copy(0.20f))
-                            .clickable { balanceVisible = !balanceVisible },
+                            .clickable { vm.isVisible = !vm.isVisible },
                     ) {
                         Icon(
-                            imageVector = if (balanceVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
-                            contentDescription = if (balanceVisible) "Hide balance" else "Show balance",
+                            imageVector = if (vm.isVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                            contentDescription = if (vm.isVisible) "Hide balance" else "Show balance",
                             modifier = Modifier.size(20.dp),
                             tint = Color.White
                         )

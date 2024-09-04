@@ -16,7 +16,7 @@ enum class Money {
 enum class SettingsOption {
     THEMES, DARK_MODE, LANGUAGE
 }
-// user dataa
+// user data
 data class User(
     val name: String,
     val balance: Float,
@@ -30,6 +30,8 @@ data class FinanceCard(
     val img:Int? = null,
 )
 class ViewHomeScreen:ViewModel() {
+    var isClose by mutableStateOf(false)
+    var isVisible by mutableStateOf(false)
     val dataUser by mutableStateOf(User("Leng Sambath",34.65f, R.drawable.me))
     fun getAllFinanceCard():List<FinanceCard>{
         return listOf(
