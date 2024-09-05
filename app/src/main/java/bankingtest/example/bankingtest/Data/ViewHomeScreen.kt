@@ -16,7 +16,7 @@ enum class Money {
 enum class SettingsOption {
     THEMES, DARK_MODE, LANGUAGE
 }
-// user dataa
+// user data
 data class User(
     val name: String,
     val balance: Float,

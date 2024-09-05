@@ -46,7 +46,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val darkMode by mutableStateOf(false)
         setContent {
-
             SetBarColor(color = Color(0xFF00468B))
             HomeScreen(darkMode)
         }
@@ -63,7 +62,6 @@ private fun SetBarColor(color: Color) {
         )
     }
 }
-
 @Composable
 fun HomeScreen(darkMode: Boolean) {
     val vm: ViewHomeScreen = viewModel()
