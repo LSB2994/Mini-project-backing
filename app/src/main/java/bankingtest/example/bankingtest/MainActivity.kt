@@ -62,7 +62,6 @@ private fun SetBarColor(color: Color) {
         )
     }
 }
-
 @Composable
 fun HomeScreen(darkMode: Boolean) {
     val vm: ViewHomeScreen = viewModel()
