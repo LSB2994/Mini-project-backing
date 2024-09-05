@@ -42,7 +42,6 @@ import com.example.bankingtest.R
 fun AccountComponent() {
     val vm: ViewHomeScreen = viewModel()
     val user by remember { mutableStateOf(vm.dataUser) }
-    var showDialog by remember { mutableStateOf(false) }
     var showNotificationDialog by remember { mutableStateOf(false) }
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -107,11 +106,11 @@ fun AccountComponent() {
                 contentDescription = "",
                 modifier = Modifier
                 .size(20.dp)
-                .clickable { showDialog = true })
-            if (showDialog) {
+                .clickable { vm.isClose = true })
+            if (vm.isClose) {
                 FullScreenDialog(
                     onDismiss = {
-                        showDialog = false
+                        vm.isClose = false
                     }
                 )
             }

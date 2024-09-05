@@ -51,7 +51,7 @@ fun FullScreenDialog(
         ) {
             Icon(
                 modifier = Modifier
-                    .clickable {if (vm.isClose) true else onDismiss().also { vm.isClose = false }}
+                    .clickable {onDismiss()}
                     .padding(5.dp)
                     .background(Color.White, shape = CircleShape),
                 imageVector = Icons.Default.Close,
